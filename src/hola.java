@@ -1,43 +1,47 @@
-public class hola extends javax.swing.JDialog {
-private javax.swing.JPanel contentPane;
-private javax.swing.JButton buttonOK;
-private javax.swing.JButton buttonCancel;
+import javax.swing.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.*;
 
-public hola(){
-setContentPane(contentPane);
-setModal(true);
-getRootPane().setDefaultButton(buttonOK);
+public class hola extends JFrame {
+    private JPanel contentPane;
+    private JButton buttonOK;
+    private JButton buttonCancel;
 
-buttonOK.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onOK();}});
+    private JTextField txtNombre;
+    private JButton btnSaludar;
+    private JLabel lblResultado;
+    public hola() {
+        setTitle("Formulario de Saludo");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 400, 200); // posición y tamaño de la ventana
 
-buttonCancel.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onCancel();}});
+        contentPane = new JPanel();
+        contentPane.setLayout(null); // layout absoluto (como usa un diseñador visual)
+        setContentPane(contentPane);
 
- // call onCancel() when cross is clicked
-setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-addWindowListener(new java.awt.event.WindowAdapter() {
-  public void windowClosing(java.awt.event.WindowEvent e) {
-   onCancel();
-  }
-});
+        JLabel lblNombre = new JLabel("Nombre:");
+        lblNombre.setBounds(30, 30, 60, 25);
+        contentPane.add(lblNombre);
 
- // call onCancel() on ESCAPE
-contentPane.registerKeyboardAction(  new java.awt.event.ActionListener() {    public void actionPerformed(java.awt.event.ActionEvent e) {      onCancel();
-    }  },  javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),  javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);}
+        txtNombre = new JTextField();
+        txtNombre.setBounds(100, 30, 200, 25);
+        contentPane.add(txtNombre);
 
-private void onOK(){
- // add your code here
-dispose();
-}
+        btnSaludar = new JButton("Saludar");
+        btnSaludar.setBounds(100, 70, 100, 30);
+        contentPane.add(btnSaludar);
 
-private void onCancel(){
- // add your code here if necessary
-dispose();
-}
+        lblResultado = new JLabel("");
+        lblResultado.setBounds(100, 110, 250, 25);
+        contentPane.add(lblResultado);
 
-public static void main(String[] args){
-hola dialog = new hola();
-dialog.pack();
-dialog.setVisible(true);
-System.exit(0);
-}
-}
+        // Acción del botón
+        btnSaludar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombre = txtNombre.getText();
+                lblResultado.setText("Hola, " + nombre + "!");
+            }
+        });
+}}
